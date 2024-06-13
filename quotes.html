@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Dreams - Uplifting Quotes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to add a new quote
+        function addQuote() {
+            const quoteInput = document.getElementById('quoteInput').value.trim();
+            const nameInput = document.getElementById('nameInput').value.trim();
+            
+            if (quoteInput && nameInput) {
+                // Create a unique ID for each quote using timestamp
+                const id = Date.now().toString();
+
+                // Create quote object
+                const newQuote = {
+                    id: id,
+                    quote: quoteInput,
+                    name: nameInput
+                };
+
+                // Add quote to local storage
+                let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+                quotes.push(newQuote);
+                localStorage.setItem('quotes', JSON.stringify(quotes));
+
+                // Add quote to the DOM
+                addQuoteToDOM(newQuote);
+
+                // Clear input fields
+                document.getElementById('quoteInput').value = '';
+                document.getElementById('nameInput').value = '';
+            } else {
+                alert('Fairy says: Please fill in both fields to share your magical quote!');
+            }
+        }
+
+        // Function to add a quote to the DOM
+        function addQuoteToDOM(quote) {
+            const quotesSection = document.getElementById('quotesSection');
+            const newQuoteDiv = document.createElement('div');
+            newQuoteDiv.classList.add('quote');
+            newQuoteDiv.setAttribute('data-id', quote.id);
+            newQuoteDiv.innerHTML = `
+                <blockquote>"${quote.quote}" - <em>${quote.name}</em></blockquote>
+                <button onclick="deleteQuote('${quote.id}')">Delete</button>
+            `;
+            quotesSection.appendChild(newQuoteDiv);
+        }
+
+        // Function to delete a quote
+        function deleteQuote(id) {
+            // Remove quote from local storage
+            let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+            quotes = quotes.filter(quote => quote.id !== id);
+            localStorage.setItem('quotes', JSON.stringify(quotes));
+
+            // Remove quote from the DOM
+            const quoteDiv = document.querySelector(`.quote[data-id="${id}"]`);
+            if (quoteDiv) {
+                quoteDiv.remove();
+            }
+        }
+
+        // Function to load quotes from local storage on page load
+        function loadQuotes() {
+            let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+            quotes.forEach(quote => {
+                addQuoteToDOM(quote);
+            });
+        }
+
+        // Load quotes when the page loads
+        window.onload = function() {
+            loadQuotes();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Fairy Dreams</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quotes.html">Uplifting Quotes</a></li>
+                <li><a href="stories.html">Fairy Stories</a></li>
+                <li><a href="selfcare.html">Self-Care Tips</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Add Your Own Quote</h2>
+            <p>Share your magical thoughts and inspire others!</p>
+            <input type="text" id="quoteInput" placeholder="Enter your quote" />
+            <input type="text" id="nameInput" placeholder="Your name" />
+            <button onclick="addQuote()">Submit Quote</button>
+        </section>
+        <section>
+            <h2>Uplifting Quotes</h2>
+            <p>Here are some quotes to lift your spirits and remind you of the magic within you:</p>
+            <div id="quotesSection">
+                    <blockquote>"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle." - <em>Christian D. Larson</em></blockquote>
+                    <blockquote>"You are never too old to set another goal or to dream a new dream." - <em>C.S. Lewis</em></blockquote>
+                    <blockquote>"The only way to achieve the impossible is to believe it is possible." - <em>Charles Kingsleigh</em></blockquote>
+                <!-- Quotes loaded dynamically from local storage will be added here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fairy Dreams</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Dreams - Self-Care Tips</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function showPrompt(activity) {
+            let response = prompt(`Fairy Wishes: How did this activity make you feel?\n\n${activity}`);
+            if (response) {
+                alert(`Fairy says: Thank you for sharing! Remember, your feelings are magical and important.`);
+            } else {
+                alert(`Fairy says: It's okay if you don't want to share. You're still magical!`);
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Fairy Dreams</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quotes.html">Uplifting Quotes</a></li>
+                <li><a href="stories.html">Fairy Stories</a></li>
+                <li><a href="selfcare.html">Self-Care Tips</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Self-Care Tips</h2>
+            <p>Take care of yourself with these gentle self-care tips:</p>
+            <ul>
+                <li>Spend some time in nature and enjoy the beauty around you. 
+                    <button onclick="showPrompt('Spending time in nature')">Share Your Experience</button>
+                    <br>
+                </li>
+                <br>
+                <li>Take a few minutes each day to practice deep breathing or meditation. 
+                    <button onclick="showPrompt('Practicing deep breathing or meditation')">Share Your Experience</button>
+                </li>
+                <br>
+                <li>Write down three things you're grateful for each day. 
+                    <button onclick="showPrompt('Writing down three things you\'re grateful for')">Share Your Experience</button>
+                </li>
+                <br>
+                <li>Make time for activities that bring you joy, whether it's reading, crafting, or dancing. 
+                    <button onclick="showPrompt('Doing activities that bring you joy')">Share Your Experience</button>
+                </li>
+                <br>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fairy Dreams</p>
+    </footer>
+</body>
+</html>
